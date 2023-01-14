@@ -24,3 +24,15 @@ app.use("/client", clientRoutes)
 app.use("/general",generalRoutes)
 app.use("/management",managementRoutes)
 app.use("/sales",salesRoutes)
+
+//DB CONNECTION
+const PORT = process.env.PORT || 9000;
+mongoose.set('strictQuery', true);
+mongoose.connect('mongodb+srv://rekt:hello123456@cluster0.5utela9.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() =>{
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`))
+}).catch((error) => console.log(`${error} did not connect`))
+
+
