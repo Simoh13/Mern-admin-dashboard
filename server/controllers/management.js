@@ -29,17 +29,18 @@ export const getUserPerformance = async (req,res) =>{
                 $unwind: "$affiliateStats"
             }
         ])
-        const filteredSaleTransaction = saleTransactions.filter(
-            (transaction) => transaction != null
-        )
-
-        res.status(200).json({user:userWithStats[0],sales: filteredSaleTransaction})
-
         const saleTransactions = await Promise.all(
             userWithStats[0].affiliateStats.affiliateSales.map((id)=>{
                 return Transaction.findById(id)
             })
         )
+        const filteredSaleTransaction = saleTransactions.filter(
+            (transaction) => transaction !== null
+        )
+
+        res.status(200).json({user:userWithStats[0],sales: filteredSaleTransaction})
+
+        
     } catch (error) {
         res.status(404).json({message : error.message})
     }
