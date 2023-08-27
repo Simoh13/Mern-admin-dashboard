@@ -33,6 +33,7 @@ export const getDashboardStats = async (req, res) => {
         yearlyTotalSoldUnits,
         yearlySalesTotal,
         monthlyData,
+        dailyData,
         salesByCategory,
       } = overallStat[0];
   
